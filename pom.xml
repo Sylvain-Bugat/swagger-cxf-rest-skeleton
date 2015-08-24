@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright 2015 Sylvain Bugat
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<prerequisites>
+		<maven>${maven.version}</maven>
+	</prerequisites>
+
+	<groupId>com.github.sbugat</groupId>
+	<artifactId>swagger-cxf-rest-skeleton</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<name>Swagger CXF REST skeleton</name>
+	<description>Skeleton of a Swagger CXF, JAX-RS 2.0 (JSR 339) REST services application</description>
+	<inceptionYear>2015</inceptionYear>
+	<url>https://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton</url>
+
+	<scm>
+		<url>https://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton</url>
+		<connection>scm:git:git://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton.git</connection>
+		<developerConnection>scm:git:git@github.com:Sylvain-Bugat/swagger-cxf-rest-skeleton.git</developerConnection>
+	</scm>
+	<distributionManagement>
+		<site>
+			<id>rundeck-monitor-github-site</id>
+			<url>scm:git:git://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton.git</url>
+		</site>
+	</distributionManagement>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton/issues/</url>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>https://raw.githubusercontent.com/Sylvain-Bugat/swagger-cxf-rest-skeleton/master/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>sbugat</id>
+			<name>Sylvain Bugat</name>
+			<url>https://github.com/Sylvain-Bugat</url>
+		</developer>
+	</developers>
+
+	<!-- Global properties -->
+	<properties>
+
+		<!-- Source Encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Reporting Encoding -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Maven version -->
+		<maven.version>3.0.5</maven.version>
+
+		<!-- JDK/JRE Version -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+
+		<!-- Spring framework version -->
+		<springframework.version>3.2.1.RELEASE</springframework.version>
+
+		<!-- CXF version -->
+		<cxf.version>3.1.2</cxf.version>
+
+		<!-- JAX RS API version -->
+		<javax-rs-api.version>2.0.1</javax-rs-api.version>
+
+		<!-- Servlet API version -->
+		<servlet-api.version>3.1.0</servlet-api.version>
+
+		<!-- Swagger version -->
+		<swagger.version>1.5.3</swagger.version>
+
+		<!--  Log Frameworks Version  -->
+		<slf4j.version>1.7.12</slf4j.version>
+		<logback.version>1.1.3</logback.version>
+
+		<!-- Maven Lifecycle Plugins Version -->
+		<maven.pluginclean.version>2.6.1</maven.pluginclean.version>
+		<maven.plugininstall.version>2.5.2</maven.plugininstall.version>
+		<maven.pluginsite.version>3.4</maven.pluginsite.version>
+		<maven.plugincompiler.version>3.3</maven.plugincompiler.version>
+		<maven.pluginsurefire.version>2.18.1</maven.pluginsurefire.version>
+		<maven.pluginjar.version>2.6</maven.pluginjar.version>
+		<maven.pluginresources.version>2.6</maven.pluginresources.version>
+		<maven.plugindeploy.version>2.8.2</maven.plugindeploy.version>
+		<maven.pluginassembly.version>2.5.5</maven.pluginassembly.version>
+		<maven.pluginversions.version>2.2</maven.pluginversions.version>
+		<maven.pluginenforcer.version>1.4</maven.pluginenforcer.version>
+		<maven.pluginantrun.version>1.8</maven.pluginantrun.version>
+		<maven.plugindependency.version>2.10</maven.plugindependency.version>
+		<maven.pluginrelease.version>2.5.2</maven.pluginrelease.version>
+		<maven.pluginscmpublish.version>1.1</maven.pluginscmpublish.version>
+		<!-- Maven reporting plugins -->
+		<maven.pluginowasp.version>1.2.7</maven.pluginowasp.version>
+		<maven.pluginpmd.version>3.5</maven.pluginpmd.version>
+		<maven.pluginfindbugs.version>3.0.2</maven.pluginfindbugs.version>
+		<maven.plugincheckstyle.version>2.16</maven.plugincheckstyle.version>
+		<maven.pluginreports.version>2.8</maven.pluginreports.version>
+		<maven.plugintaglist.version>2.4</maven.plugintaglist.version>
+		<maven.pluginchanges.version>2.11</maven.pluginchanges.version>
+		<maven.pluginjavadoc.version>2.10.3</maven.pluginjavadoc.version>
+		<maven.pluginjxr.version>2.5</maven.pluginjxr.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring framework dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<!-- CXF dependencies -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+	
+		<!-- Swagger dependency -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jaxrs</artifactId>
+			<version>1.5.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- JAX-RS 2.0 API (JSR 339) dependency -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- Servlet API dependency -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Log dependencies (SLF4J, LogBack) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-ext</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- Compiler plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.plugincompiler.version}</version>
+				<configuration>
+					<compilerVersion>${maven.compiler.source}</compilerVersion>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<compilerArgs>
+						<arg>-Xlint</arg>
+					</compilerArgs>
+				</configuration>
+				<inherited>true</inherited>
+			</plugin>
+
+			<!-- Swagger UI download -->
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>download-swagger-ui</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/swagger-api/swagger-ui/archive/v2.1.2.zip</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Swagger UI integration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.pluginresources.version}</version>
+				<executions>
+					<execution>
+						<id>integrate-swagger-ui</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+						<outputDirectory>target/${project.artifactId}-${project.version}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/swagger-ui-2.1.2/dist</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>index.html</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Install plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${maven.plugininstall.version}</version>
+			</plugin>
+
+			<!-- Clean plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven.pluginclean.version}</version>
+			</plugin>
+
+			<!-- Site plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven.pluginsite.version}</version>
+				<configuration>
+					<locales>en</locales>
+				</configuration>
+			</plugin>
+
+			<!-- Testing Launcher Plugins configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.pluginsurefire.version}</version>
+			</plugin>
+
+			<!-- Deploy plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven.plugindeploy.version}</version>
+			</plugin>
+
+			<!-- Enforcer plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${maven.pluginenforcer.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-java</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>[${maven.compiler.source}.0,)</version>
+								</requireJavaVersion>
+								<requireMavenVersion>
+									<version>[${maven.version},)</version>
+								</requireMavenVersion>
+							</rules>    
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Versions plugin configuration -->
+			<!-- Dependencies check with this command: mvn -U versions:display-plugin-updates  versions:display-property-updates -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${maven.pluginversions.version}</version>
+				<configuration>
+					<rulesUri>file:./dependencies-check-rules.xml</rulesUri>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven.pluginassembly.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven.pluginantrun.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven.plugindependency.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven.pluginrelease.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-publish-plugin</artifactId>
+					<version>${maven.pluginscmpublish.version}</version>
+					<configuration>
+						<checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+						<checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}</checkinComment>
+						<content>${project.reporting.outputDirectory}</content>
+						<skipDeletedFiles>true</skipDeletedFiles>
+						<pubScmUrl>scm:git:git@github.com:Sylvain-Bugat/RundeckMonitor.git</pubScmUrl>
+						<scmBranch>gh-pages</scmBranch>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- Reports for the maven site, publish with "mvn scm-publish:publish-scm" from a git shell-->
+	<reporting>
+		<plugins>
+			<!-- Reporting plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven.pluginreports.version}</version>
+			</plugin>
+			<!-- Changes report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<version>${maven.pluginchanges.version}</version>
+				<configuration>
+					<onlyMilestoneIssues>false</onlyMilestoneIssues>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+							<report>github-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- TODO/FIXME tags -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+				<version>${maven.plugintaglist.version}</version>
+				<configuration>
+					<tagListOptions>
+						<tagClasses>
+							<tagClass>
+							<displayName>Todo and fix</displayName>
+							<tags>
+								<tag>
+									<matchString>todo</matchString>
+									<matchType>ignoreCase</matchType>
+								</tag>
+								<tag>
+									<matchString>FIXME</matchString>
+									<matchType>exact</matchType>
+								</tag>
+							</tags>
+						  </tagClass>
+						</tagClasses>
+					</tagListOptions>
+				</configuration>
+			</plugin>
+			<!-- Dependencies check -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${maven.pluginversions.version}</version>
+				<configuration>
+					<rulesUri>file:./dependencies-check-rules.xml</rulesUri>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>property-updates-report</report>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- OWASP dependencies check report-->
+			<!--<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>${maven.pluginowasp.version}</version>
+				<configuration>
+					<suppressionFile>./owasp-false-positive.xml</suppressionFile>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>check</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>-->
+			<!-- PMD/CPD -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${maven.pluginpmd.version}</version>
+				<configuration>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<targetJdk>${maven.compiler.source}</targetJdk>
+					<linkXref>true</linkXref>
+				</configuration>
+			</plugin>
+			<!-- Findbugs -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${maven.pluginfindbugs.version}</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<xmlOutput>true</xmlOutput>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+					<findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+					<jvmArgs>-Duser.language=en -Duser.country=US</jvmArgs>
+				</configuration>
+			</plugin>
+			<!-- CheckStyle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven.plugincheckstyle.version}</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+			<!-- Javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.pluginjavadoc.version}</version>
+				<configuration>
+					<show>private</show>
+					<source>${maven.compiler.source}</source>
+					<links>
+						<link>http://rundeck.github.io/rundeck-api-java-client/apidocs</link>
+					</links>
+				</configuration>
+			</plugin>
+			<!-- Inline sources report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven.pluginjxr.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<!-- GitHub Client external Eclipse release repository -->
+	<repositories>
+		<repository>
+			<id>egit-release</id>
+			<url>https://repo.eclipse.org/content/repositories/egit-releases</url>
+		</repository>
+	 </repositories>
+</project>
