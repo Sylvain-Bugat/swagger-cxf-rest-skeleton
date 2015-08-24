@@ -104,7 +104,7 @@
 		<maven.plugincompiler.version>3.3</maven.plugincompiler.version>
 		<maven.pluginsurefire.version>2.18.1</maven.pluginsurefire.version>
 		<maven.pluginjar.version>2.6</maven.pluginjar.version>
-		<maven.pluginresources.version>2.6</maven.pluginresources.version>
+		<maven.pluginresources.version>2.7</maven.pluginresources.version>
 		<maven.plugindeploy.version>2.8.2</maven.plugindeploy.version>
 		<maven.pluginassembly.version>2.5.5</maven.pluginassembly.version>
 		<maven.pluginversions.version>2.2</maven.pluginversions.version>
@@ -280,6 +280,14 @@
 						</configuration>
 					</execution>
 				</executions>
+				<!-- Temporary fix of "Mark invalid" error with the 2.7 plugin version -->
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.shared</groupId>
+						<artifactId>maven-filtering</artifactId>
+						<version>1.3</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<!-- Install plugin configuration -->
@@ -327,7 +335,7 @@
 				<version>${maven.pluginenforcer.version}</version>
 				<executions>
 					<execution>
-						<id>enforce-java</id>
+						<id>enforce-java-and-maven</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
