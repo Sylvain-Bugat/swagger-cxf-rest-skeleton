@@ -79,7 +79,7 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 
 		<!-- Spring framework version -->
-		<springframework.version>3.2.1.RELEASE</springframework.version>
+		<springframework.version>4.2.0.RELEASE</springframework.version>
 
 		<!-- CXF version -->
 		<cxf.version>3.1.2</cxf.version>
