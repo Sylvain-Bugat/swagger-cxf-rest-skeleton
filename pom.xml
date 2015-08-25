@@ -74,7 +74,7 @@
 		<!-- Maven version -->
 		<maven.version>3.0.5</maven.version>
 
-		<!-- JDK/JRE Version -->
+		<!-- JDK/JRE version -->
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 
@@ -93,7 +93,10 @@
 		<!-- Swagger version -->
 		<swagger.version>1.5.3</swagger.version>
 
-		<!--  Log Frameworks Version  -->
+		<!-- Tools version -->
+		<guava.version>18.0</guava.version>
+
+		<!--  Log frameworks version  -->
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.3</logback.version>
 
@@ -182,6 +185,13 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- Tools dependencies (Guava, ... ) -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 
 		<!-- Log dependencies (SLF4J, LogBack) -->
