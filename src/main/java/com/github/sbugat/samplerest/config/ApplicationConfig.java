@@ -18,7 +18,12 @@ public class ApplicationConfig {
 	private Environment environment;
 
 	@Bean
-	public static PropertySourcesPlaceholderConfigurer ppc() {
+	public String testBean() {
+		return environment.getProperty("test.param");
+	}
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		// instantiate, configure and return ppc ...
 		return new PropertySourcesPlaceholderConfigurer();
 	}
