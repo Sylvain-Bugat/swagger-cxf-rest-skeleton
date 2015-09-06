@@ -9,17 +9,4 @@
 
 	<context:component-scan base-package="com.github.sbugat.samplerest" />
 
-	<!-- this scans the classes for resources -->
-	<bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
-		<property name="resourcePackage" value="com.github.sbugat.samplerest.resource"/>
-		<property name="version" value="1.0.0"/>
-		<property name="host" value="localhost:8080"/>
-		<property name="basePath" value="/api"/>
-		<property name="title" value="Swagger Sample"/>
-		<property name="description" value="This is a sample API."/>
-		<property name="contact" value="none"/>
-		<property name="license" value="Apache 2.0"/>
-		<property name="licenseUrl" value="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-		<property name="scan" value="true"/>
-	</bean>
 </beans>
