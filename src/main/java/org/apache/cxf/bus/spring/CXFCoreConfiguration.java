@@ -37,16 +37,6 @@ public class CXFCoreConfiguration {
 	}
 
 	/**
-	 * Construct the CXF bus extension post processor.
-	 *
-	 * @return CXF Bus extension post processor
-	 */
-	@Bean(name = "org.apache.cxf.bus.spring.BusExtensionPostProcessor")
-	public BusExtensionPostProcessor busExtensionPostProcessor() {
-		return new BusExtensionPostProcessor();
-	}
-
-	/**
 	 * Construct the annotation (JSR 250) post processor.
 	 *
 	 * @return CXF annotation post processor
@@ -57,4 +47,13 @@ public class CXFCoreConfiguration {
 		return new Jsr250BeanPostProcessor();
 	}
 
+	/**
+	 * Construct the CXF bus extension post processor.
+	 *
+	 * @return CXF Bus extension post processor
+	 */
+	@Bean(name = "org.apache.cxf.bus.spring.BusExtensionPostProcessor")
+	public BusExtensionPostProcessor busExtensionPostProcessor() {
+		return new BusExtensionPostProcessor();
+	}
 }
