@@ -78,11 +78,11 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 
+		<!-- Dependencies injection version (JSR 330) -->
+		<javax-inject-api.version>1</javax-inject-api.version>
+
 		<!-- Spring framework version -->
 		<springframework.version>4.2.1.RELEASE</springframework.version>
-
-		<!-- Dependencies injection version -->
-		<javax-inject-api.version>1</javax-inject-api.version>
 
 		<!-- CXF version -->
 		<cxf.version>3.1.2</cxf.version>
@@ -133,6 +133,13 @@
 
 	<dependencies>
 
+		<!-- Dependencies injection API (JSR 330) -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax-inject-api.version}</version>
+		</dependency>
+
 		<!-- Spring framework dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -148,13 +155,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${springframework.version}</version>
-		</dependency>
-
-		<!-- Dependencies injection API -->
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>${javax-inject-api.version}</version>
 		</dependency>
 
 		<!-- CXF dependencies -->
