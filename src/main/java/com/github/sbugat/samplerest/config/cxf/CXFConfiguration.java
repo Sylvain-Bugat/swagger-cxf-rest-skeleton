@@ -1,4 +1,4 @@
-package com.github.sbugat.samplerest.config;
+package com.github.sbugat.samplerest.config.cxf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
+import org.apache.cxf.bus.spring.CXFCoreConfiguration;
 import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +22,7 @@ import com.google.common.collect.Lists;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @Configuration
-@Import(ApplicationConfig.class)
+@Import({ CXFCoreConfiguration.class })
 public class CXFConfiguration {
 
 	/** Spring context. */
