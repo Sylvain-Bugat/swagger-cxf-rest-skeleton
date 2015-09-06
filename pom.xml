@@ -84,13 +84,13 @@
 		<!-- Spring framework version -->
 		<springframework.version>4.2.1.RELEASE</springframework.version>
 
+		<!-- JAX RS API version (JSR 339) -->
+		<javax-rs-api.version>2.0.1</javax-rs-api.version>
+
 		<!-- CXF version -->
 		<cxf.version>3.1.2</cxf.version>
 
-		<!-- JAX RS API version -->
-		<javax-rs-api.version>2.0.1</javax-rs-api.version>
-
-		<!-- Servlet API version -->
+		<!-- Servlet API version (JSR 340) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
 
 		<!-- Swagger version -->
@@ -157,6 +157,13 @@
 			<version>${springframework.version}</version>
 		</dependency>
 
+		<!-- JAX-RS 2.0 API dependency (JSR 339) -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>${javax-rs-api.version}</version>
+		</dependency>
+
 		<!-- CXF dependencies -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -173,7 +180,7 @@
 			<artifactId>cxf-rt-rs-extension-providers</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-	
+
 		<!-- Swagger dependency -->
 		<dependency>
 			<groupId>io.swagger</groupId>
@@ -182,14 +189,7 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- JAX-RS 2.0 API (JSR 339) dependency -->
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>${javax-rs-api.version}</version>
-		</dependency>
-
-		<!-- Servlet API dependency -->
+		<!-- Servlet API dependency (JSR 340) -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
