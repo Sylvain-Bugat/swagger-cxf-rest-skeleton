@@ -17,11 +17,11 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @Configuration
 @ComponentScan("com.github.sbugat.samplerest")
-@PropertySource("classpath:env/${" + ApplicationConfig.ENVIRONMENT_TYPE + ':' + ApplicationConfig.DEFAULT_ENVIRONMENT_TYPE + "}/application-configuration.properties")
+@PropertySource("classpath:environment/${" + ApplicationConfig.ENVIRONMENT_TYPE + ':' + ApplicationConfig.DEFAULT_ENVIRONMENT_TYPE + "}/application-configuration.properties")
 public class ApplicationConfig {
 
 	static final String ENVIRONMENT_TYPE = "environment.type";
-	static final String DEFAULT_ENVIRONMENT_TYPE = "dev";
+	static final String DEFAULT_ENVIRONMENT_TYPE = "development";
 
 	@Inject
 	private Environment environment;

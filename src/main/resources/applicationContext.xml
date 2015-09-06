@@ -11,28 +11,6 @@
 
 	<context:component-scan base-package="com.github.sbugat.samplerest" />
 
-	<!-- Swagger writers -->
-	<bean id="swaggerWriter" class="io.swagger.jaxrs.listing.SwaggerSerializers" />
-
-	<!-- JSON mapper -->
-	<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
-
-	<!-- Exception mapper -->
-	<bean id="exceptionMapper" class="com.github.sbugat.samplerest.resource.SampleExceptionMapper" />
-
-	<!-- Application resources -->
-	<bean id="userResource" class="com.github.sbugat.samplerest.resource.UserResource" />
-	<bean id="bookResource" class="com.github.sbugat.samplerest.resource.BookResource" />
-
-	<!-- Swagger API listing resource -->
-	<bean id="swaggerResource" class="io.swagger.jaxrs.listing.ApiListingResource" />
-
-	<cxf:bus>
-		<cxf:features>
-			<cxf:logging />
-		</cxf:features>
-	</cxf:bus>
-
 	<!-- this scans the classes for resources -->
 	<bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
 		<property name="resourcePackage" value="com.github.sbugat.samplerest.resource"/>
@@ -45,24 +23,5 @@
 		<property name="license" value="Apache 2.0"/>
 		<property name="licenseUrl" value="http://www.apache.org/licenses/LICENSE-2.0.html"/>
 		<property name="scan" value="true"/>
-	</bean>
-
-	<bean class="org.apache.cxf.jaxrs.JAXRSServerFactoryBean" init-method="create">
-		<property name="address" value="/" />
-		<property name="serviceBeans">
-			<list>
-				<ref bean="userResource" />
-				<ref bean="bookResource" />
-
-				<ref bean="swaggerResource" />
-			</list>
-		</property>
-		<property name="providers">
-			<list>
-				<ref bean="jsonProvider" />
-				<ref bean="swaggerWriter" />
-				<ref bean="exceptionMapper" />
-			</list>
-		</property>
 	</bean>
 </beans>
