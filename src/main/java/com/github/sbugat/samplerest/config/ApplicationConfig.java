@@ -11,17 +11,25 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @ComponentScan("com.github.sbugat.samplerest")
-@PropertySource("classpath:application-configuration.properties")
+@PropertySource("classpath:env/${" + ApplicationConfig.ENVIRONMENT_TYPE + ':' + ApplicationConfig.DEFAULT_ENVIRONMENT_TYPE + "}/application-configuration.properties")
 public class ApplicationConfig {
+
+	static final String ENVIRONMENT_TYPE = "environment.type";
+	static final String DEFAULT_ENVIRONMENT_TYPE = "dev";
 
 	@Inject
 	private Environment environment;
 
 	@Bean
-	public String testBean() {
-		return environment.getProperty("test.param");
+	public String environmentType() {
+		return environment.getProperty(ENVIRONMENT_TYPE);
 	}
 
+	/**
+	 * Return the PropertySourcesPlaceholderConfigurer before properties file loading (static method).
+	 *
+	 * @return new PropertySourcesPlaceholderConfigurer instance
+	 */
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		// instantiate, configure and return ppc ...
