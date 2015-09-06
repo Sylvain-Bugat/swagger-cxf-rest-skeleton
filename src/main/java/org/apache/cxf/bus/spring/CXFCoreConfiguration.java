@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.github.sbugat.samplerest.config.ApplicationConfig;
+import com.github.sbugat.samplerest.config.CoreConfiguration;
 
 /**
  * CXF Spring configuration based on CXF core cxf.xml file.
@@ -15,7 +15,7 @@ import com.github.sbugat.samplerest.config.ApplicationConfig;
  * @see org.apache.cxf.bus.spring.Jsr250BeanPostProcessor
  */
 @Configuration
-@Import(ApplicationConfig.class)
+@Import(CoreConfiguration.class)
 public class CXFCoreConfiguration {
 
 	/**

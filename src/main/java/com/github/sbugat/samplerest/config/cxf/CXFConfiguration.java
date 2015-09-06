@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @Configuration
-@Import({ CXFCoreConfiguration.class })
+@Import(CXFCoreConfiguration.class)
 public class CXFConfiguration {
 
 	/** Spring context. */
