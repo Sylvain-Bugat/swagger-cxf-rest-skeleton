@@ -12,7 +12,6 @@ import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
@@ -21,7 +20,6 @@ import com.google.common.collect.Lists;
 
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
-@Configuration
 @Import(CXFCoreConfiguration.class)
 public class CXFConfiguration {
 

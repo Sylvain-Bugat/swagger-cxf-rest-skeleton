@@ -1,7 +1,6 @@
 package org.apache.cxf.bus.spring;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.github.sbugat.samplerest.config.CoreConfiguration;
@@ -14,7 +13,6 @@ import com.github.sbugat.samplerest.config.CoreConfiguration;
  * @author Sylvain Bugat
  * @see org.apache.cxf.bus.spring.Jsr250BeanPostProcessor
  */
-@Configuration
 @Import(CoreConfiguration.class)
 public class CXFCoreConfiguration {
 

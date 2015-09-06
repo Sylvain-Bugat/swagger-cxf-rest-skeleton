@@ -7,8 +7,12 @@
 	<!-- Context loading -->
 	<display-name>Swagger-CXF-Sample</display-name>
 	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>com.github.sbugat.samplerest.config.application.ApplicationConfiguration</param-value>
 	</context-param>
 
 	<!-- Listeners -->
