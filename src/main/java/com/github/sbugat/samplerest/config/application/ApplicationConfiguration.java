@@ -5,11 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.github.sbugat.samplerest.config.cxf.CXFConfiguration;
+import com.github.sbugat.samplerest.config.security.SecurityConfiguration;
 
 import io.swagger.jaxrs.config.BeanConfig;
 
 @Configuration
-@Import(CXFConfiguration.class)
+@Import({ CXFConfiguration.class, SecurityConfiguration.class })
 public class ApplicationConfiguration {
 
 	@Bean
