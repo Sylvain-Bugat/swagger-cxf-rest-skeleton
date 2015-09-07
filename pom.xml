@@ -87,6 +87,9 @@
 		<!-- JAX RS API version (JSR 339) -->
 		<javax-rs-api.version>2.0.1</javax-rs-api.version>
 
+		<!-- Spring security framework version -->
+		<spring-security-framework.version>4.0.2.RELEASE</spring-security-framework.version>
+
 		<!-- CXF version -->
 		<cxf.version>3.1.2</cxf.version>
 
@@ -167,6 +170,18 @@
 			<version>${javax-rs-api.version}</version>
 		</dependency>
 
+		<!-- Spring security framework dependencies -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security-framework.version}</version>
+		</dependency>
+  
 		<!-- CXF dependencies -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
