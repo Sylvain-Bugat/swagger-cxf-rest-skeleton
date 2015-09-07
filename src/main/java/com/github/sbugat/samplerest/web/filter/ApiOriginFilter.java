@@ -17,10 +17,10 @@ public class ApiOriginFilter implements Filter {
 
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
-		final HttpServletResponse res = (HttpServletResponse) response;
-		res.addHeader("Access-Control-Allow-Origin", "*");
-		res.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-		res.addHeader("Access-Control-Allow-Headers", "Content-Type");
+		final HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+		httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
+		httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+		httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization");
 		chain.doFilter(request, response);
 	}
 
