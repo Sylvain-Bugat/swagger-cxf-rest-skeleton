@@ -11,7 +11,7 @@ import org.apache.cxf.transport.servlet.CXFServlet;
 		loadOnStartup = 1,
 		initParams = { @WebInitParam(
 				name = "swagger.api.basepath",
-				value = "http://localhost:8080/api"),
+				value = "/api"),
 				@WebInitParam(
 						name = "swagger.security.filter",
 						value = "ApiAuthorizationFilterImpl") },
