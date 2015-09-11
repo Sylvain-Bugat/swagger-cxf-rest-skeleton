@@ -23,11 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.csrf().disable() // Disable CSRF
-				.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and() // Entry point
-				.authorizeRequests().antMatchers("/*").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
-				.and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access
-				.and().formLogin().loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password")// login access
-				.and().logout(); // Logout
+		/*
+		 * httpSecurity.csrf().disable() // Disable CSRF .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and() // Entry point // .authorizeRequests().antMatchers("/*").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access .authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access .and().formLogin().loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password")// login access .and().logout(); // Logout
+		 */
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").and().formLogin();
 	}
 }
