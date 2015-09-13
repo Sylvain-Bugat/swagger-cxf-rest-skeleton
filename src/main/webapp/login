@@ -4,30 +4,48 @@
 		<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
 		
 		<script type="text/javascript">
-		$(document).ready(function() {
-			$('form[name=idLogin]').submit(function(e){
-				e.preventDefault();
-				$.ajax({
-					type: 'POST',
-					cache: false,
-					url: '/api/user/login',
-					data: $(this).serialize(), 
-					success: function(msg) {
-						var apiTokenField=document.getElementById('apiToken');
-						apiTokenField.value=msg.apiToken;
-
-						document.forms["apiTokenForm"].submit();
-					}
+			$(document).ready(function() {
+				$('form[name=loginForm]').submit(function(e){
+					e.preventDefault();
+					$.ajax({
+						type: 'POST',
+						cache: false,
+						url: '/api/user/login',
+						data: $(this).serialize(),
+						success: function(msg) {
+							window.location.replace("/login?apiToken=" + msg.apiToken);
+						}
+					});
 				});
+
+				var apiKey = location.search.split('apiToken=')[1];
+				if (typeof apiKey != 'undefined') {
+					var apiTokenField=document.getElementById('apiToken');
+					apiTokenField.value=apiKey;
+					submitAPITokenForm();
+				}
 			});
-		});
+
+			function submitAPITokenForm()
+			{
+				var xhr = new XMLHttpRequest();
+				xhr.onload = function(){
+					document.write(xhr.responseText);
+					document.close();
+				}
+				var apiTokenField=document.getElementById('apiToken');
+				xhr.open ("GET", "/", true);
+				xhr.setRequestHeader('api_token', apiTokenField.value);
+				xhr.send();
+				return false;
+			}
 		</script>
 	</head>
 	<body>
 		<div id="boxContentId">
 		</div>
 		<div tiles:fragment="content">
-			<form name="idLogin" action="/api/user/login">
+			<form name="loginForm" action="/api/user/login">
 				<fieldset>
 					<legend>Please Login</legend>
 					<div th:if="${param.error}" class="alert alert-error">
@@ -43,12 +61,9 @@
 				</fieldset>
 			</form>
 
-			<form name="apiTokenForm" action="/" method="post">
+			<form style="display: none;" name="apiTokenForm" action="/" method="GET">
 				<fieldset>
 					<legend>Use/test an existing API token</legend>
-					<div th:if="${param.error}" class="alert alert-error">
-						Invalid API token.
-					</div>
 					<label for="apiToken">API token</label>
 					<input type="text" id="apiToken" name="apiToken"/>
 					<div class="form-actions">
