@@ -61,7 +61,7 @@
 				</fieldset>
 			</form>
 
-			<form style="display: none;" name="apiTokenForm" action="/" method="GET">
+			<form style="display: none;" name="apiTokenForm" action="/swagger/" method="GET">
 				<fieldset>
 					<legend>Use/test an existing API token</legend>
 					<label for="apiToken">API token</label>
