@@ -6,8 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.github.sbugat.samplerest.web.security.RestAuthenticationEntryPoint;
+import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -23,9 +26,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
-		/*
-		 * httpSecurity.csrf().disable() // Disable CSRF .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and() // Entry point // .authorizeRequests().antMatchers("/*").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access .authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access .and().formLogin().loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password")// login access .and().logout(); // Logout
-		 */
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").and().formLogin();
+		httpSecurity.csrf().disable() // Disable CSRF
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
+				.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint) // Entry point
+				// .authorizeRequests().antMatchers("/*").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
+				.and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access
+				.and().formLogin().failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
+				.and().addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**").anonymous() // API token filter
+				.and().logout(); // Logout
 	}
 }

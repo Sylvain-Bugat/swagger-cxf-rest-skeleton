@@ -20,7 +20,7 @@ public class ApiOriginFilter implements Filter {
 		final HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
 		httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-		httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, api_key, Authorization");
+		httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, api_token, Authorization");
 		chain.doFilter(request, response);
 	}
 

@@ -8,6 +8,8 @@ import com.github.sbugat.samplerest.config.cxf.CXFConfiguration;
 import com.github.sbugat.samplerest.config.security.SecurityConfiguration;
 
 import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.models.auth.ApiKeyAuthDefinition;
+import io.swagger.models.auth.In;
 
 @Configuration
 @Import({ CXFConfiguration.class, SecurityConfiguration.class })
@@ -25,7 +27,11 @@ public class ApplicationConfiguration {
 		beanConfig.setContact("Sylvain Bugat");
 		beanConfig.setLicense("Apache 2.0");
 		beanConfig.setLicenseUrl("https://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton/blob/master/LICENSE");
+
+		beanConfig.getSwagger().addSecurityDefinition("api_token", new ApiKeyAuthDefinition("api_token", In.HEADER));
+
 		beanConfig.setScan(true);
+
 		return beanConfig;
 	}
 }
