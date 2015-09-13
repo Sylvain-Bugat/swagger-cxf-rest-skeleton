@@ -29,10 +29,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable() // Disable CSRF
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
 				.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint) // Entry point
-				// .authorizeRequests().antMatchers("/*").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
-				.and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access
-				.and().formLogin().failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
 				.and().addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**").anonymous() // API token filter
+				.and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')").anyRequest().authenticated() // User access
+				.and().authorizeRequests().antMatchers("/api/swagger.json").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
+				.and().authorizeRequests().antMatchers("/swagger/**").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
+				.and().formLogin().failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
+				// .and().addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**").anonymous() // API token filter
 				.and().logout(); // Logout
 	}
 }
