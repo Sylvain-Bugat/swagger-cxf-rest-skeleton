@@ -30,20 +30,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**") // API token filter
-				// .addFilterBefore(new TokenAuthenticationFilter2("/swagger/**"), AnonymousAuthenticationFilter.class).antMatcher("/swagger/**") // API token filter
+		httpSecurity// .addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**") // API token filter
 				.csrf().disable() // Disable CSRF
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
-				.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint) // Entry point
-				.and().authorizeRequests().antMatchers("/lib/**").permitAll() //
-				.and().formLogin().successHandler(authenticationSuccessHandler).failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
-				.and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')") // User access
-				.and().authorizeRequests().antMatchers("/api/swagger.json").access("hasRole('ROLE_ADMIN')") // Admin access
-				.and().authorizeRequests().antMatchers("/swagger/**").access("hasRole('ROLE_ADMIN')") // Admin access
-				// .and().authorizeRequests().antMatchers("/swagger/**").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
+
+		.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint) // Entry point
+
+		.and()// .addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).authorizeRequests()// API token filter
+				.authorizeRequests().antMatchers("/api/*").hasRole("ADMIN") // Admin access
+				.antMatchers("/api/**").hasRole("USER") // User access
+				.antMatchers("/lib/**").permitAll() //
+
+		.and().formLogin().successHandler(authenticationSuccessHandler).failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
+				.and().addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class);
+				// .and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')") // User access
+
+		// .and().authorizeRequests().antMatchers("/swagger/**").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
 
 		// .and().addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**").anonymous() // API token filter
-				.and().logout(); // Logout
+		// .and().logout(); // Logout
 
 		// httpSecurity.addFilterBefore(new TokenAuthenticationFilter2("/swagger/**"), AnonymousAuthenticationFilter.class).antMatcher("/swagger/**"); // API token filter
 	}
