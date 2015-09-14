@@ -7,17 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.github.sbugat.samplerest.web.security.AuthenticationSuccessHandler;
-import com.github.sbugat.samplerest.web.security.RestAuthenticationEntryPoint;
 import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-	@Inject
-	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
 	@Inject
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -34,14 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.csrf().disable() // Disable CSRF
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
 
-		.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint) // Entry point
+		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
 		.and()// .addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).authorizeRequests()// API token filter
 				.authorizeRequests().antMatchers("/api/*").hasRole("ADMIN") // Admin access
 				.antMatchers("/api/**").hasRole("USER") // User access
 				.antMatchers("/lib/**").permitAll() //
 
-		.and().formLogin().successHandler(authenticationSuccessHandler).failureUrl("/login").loginProcessingUrl("/api/user/login").usernameParameter("username").passwordParameter("password") // login access
+		.and().formLogin().successHandler(authenticationSuccessHandler).failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
 				.and().addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class);
 				// .and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')") // User access
 
