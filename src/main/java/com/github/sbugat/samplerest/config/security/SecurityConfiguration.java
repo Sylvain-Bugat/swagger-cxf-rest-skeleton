@@ -33,11 +33,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
-		.and().authorizeRequests().antMatchers("/api/*", "/lib/**", "/css/**", "/lang/**", "/images/**", "/o2c.html", "/swagger-ui*").hasRole("ADMIN") // Admin access
-				.antMatchers("/login", "/api/user/login").anonymous() // Login access
-				.antMatchers("/login").hasRole("USER") // User access
-				.antMatchers("/**").denyAll() // User access
+		.and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
 
-		.and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password"); // login access
+		.and().authorizeRequests().antMatchers("/api/*").hasRole("ADMIN") // Admin access to Swagger
+				.antMatchers("/login", "/lib/**", "/css/**", "/lang/**", "/images/**", "/fonts/**", "/o2c.html", "/swagger-ui*").permitAll() // Login and resources access
+				.antMatchers("/api/**").hasAnyRole("USER", "ADMIN") // API access
+				.antMatchers("/**").denyAll(); // Deny others
+
 	}
 }
