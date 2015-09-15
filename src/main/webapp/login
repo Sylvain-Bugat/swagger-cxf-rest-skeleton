@@ -35,7 +35,7 @@
 					document.close();
 				}
 				var apiTokenField=document.getElementById('apiToken');
-				xhr.open ("GET", "/api/swagger.html", true);
+				xhr.open ("GET", "/api/swagger/ui.html", true);
 				xhr.setRequestHeader('api_token', apiTokenField.value);
 				xhr.send();
 				return false;
@@ -62,7 +62,7 @@
 				</fieldset>
 			</form>
 
-			<form style="display: none;" name="apiTokenForm" action="/api/swagger.html" method="GET">
+			<form style="display: none;" name="apiTokenForm" action="/api/swagger/ui.html" method="GET">
 				<fieldset>
 					<legend>Use/test an existing API token</legend>
 					<label for="apiToken">API token</label>
