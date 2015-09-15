@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
-		.and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
+		// .and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
 
 		.and().authorizeRequests().antMatchers("/api/*").hasRole("ADMIN") // Admin access to Swagger
 				.antMatchers("/login", "/lib/**", "/css/**", "/lang/**", "/images/**", "/fonts/**", "/o2c.html", "/swagger-ui*").permitAll() // Login and resources access
