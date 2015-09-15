@@ -1,8 +1,9 @@
-<html xmlns:th="" xmlns:tiles="">
+<!DOCTYPE html>
+<html>
 	<head>
-		<title tiles:fragment="title">Messages : Create</title>
-		<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-		
+		<title tiles:fragment="title">Login</title>
+		<script src='jquery-2.1.4.min.js' type='text/javascript'></script>
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('form[name=loginForm]').submit(function(e){
@@ -34,7 +35,7 @@
 					document.close();
 				}
 				var apiTokenField=document.getElementById('apiToken');
-				xhr.open ("GET", "/api/swagger/ui", true);
+				xhr.open ("GET", "/api/swagger.html", true);
 				xhr.setRequestHeader('api_token', apiTokenField.value);
 				xhr.send();
 				return false;
@@ -61,7 +62,7 @@
 				</fieldset>
 			</form>
 
-			<form style="display: none;" name="apiTokenForm" action="/api/swagger/ui" method="GET">
+			<form style="display: none;" name="apiTokenForm" action="/api/swagger.html" method="GET">
 				<fieldset>
 					<legend>Use/test an existing API token</legend>
 					<label for="apiToken">API token</label>

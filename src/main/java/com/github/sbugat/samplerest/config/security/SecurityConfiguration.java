@@ -27,26 +27,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity// .addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**") // API token filter
-				.csrf().disable() // Disable CSRF
+		httpSecurity.csrf().disable() // Disable CSRF
+				.addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class) // API token filter
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
-		.and()// .addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).authorizeRequests()// API token filter
-				.authorizeRequests().antMatchers("/api/*").hasRole("ADMIN") // Admin access
-				.antMatchers("/api/**").hasRole("USER") // User access
-				.antMatchers("/lib/**").permitAll() //
+		.and().authorizeRequests().antMatchers("/api/*", "/lib/**", "/css/**", "/lang/**", "/images/**", "/o2c.html", "/swagger-ui*").hasRole("ADMIN") // Admin access
+				.antMatchers("/login", "/api/user/login").anonymous() // Login access
+				.antMatchers("/login").hasRole("USER") // User access
+				.antMatchers("/**").denyAll() // User access
 
-		.and().formLogin().successHandler(authenticationSuccessHandler).failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
-				.and().addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class);
-				// .and().authorizeRequests().antMatchers("/api/**").access("hasRole('ROLE_USER')") // User access
-
-		// .and().authorizeRequests().antMatchers("/swagger/**").access("hasRole('ROLE_ADMIN')").anyRequest().authenticated() // Admin access
-
-		// .and().addFilterBefore(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class).antMatcher("/api/**").anonymous() // API token filter
-		// .and().logout(); // Logout
-
-		// httpSecurity.addFilterBefore(new TokenAuthenticationFilter2("/swagger/**"), AnonymousAuthenticationFilter.class).antMatcher("/swagger/**"); // API token filter
+		.and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password"); // login access
 	}
 }
