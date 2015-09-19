@@ -1,6 +1,7 @@
 package com.github.sbugat.samplerest.config.security;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.dao.SaltSource;
@@ -23,6 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
 
 	@Inject
+	private ServletContext servletContext;
+
+	@Inject
 	public void configureGlobal(final AuthenticationManagerBuilder authentication) throws Exception {
 		authentication.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("password").roles("ADMIN");
 
@@ -40,18 +44,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity httpSecurity) throws Exception {
 
+		final String contextPath = servletContext.getContextPath();
+
 		httpSecurity.csrf().disable() // Disable CSRF
-				.addFilterAfter(new TokenAuthenticationFilter("/api/**"), UsernamePasswordAuthenticationFilter.class) // API token filter
+				.addFilterAfter(new TokenAuthenticationFilter(contextPath + "/**"), UsernamePasswordAuthenticationFilter.class) // API token filter
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
 		// .and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
 
-		.and().authorizeRequests().antMatchers("/swagger/login", "/swagger/jquery.min.js").permitAll() // Login and resources access
-				.antMatchers("/api/*", "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
-				.antMatchers("/api/**").hasAnyRole("USER", "ADMIN") // API access
-				.antMatchers("/**").denyAll(); // Deny all others
+		.and().authorizeRequests().antMatchers(contextPath + "/swagger/login", contextPath + "/swagger/jquery.min.js").permitAll() // Login and resources access
+				.antMatchers(contextPath + "/*", contextPath + "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
+				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN") // API access
+				.antMatchers("/**").denyAll(); // Deny all other resources
 
 	}
 }
