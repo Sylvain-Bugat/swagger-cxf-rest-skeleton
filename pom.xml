@@ -181,6 +181,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security-framework.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>4.0</version>
+		</dependency>
   
 		<!-- CXF dependencies -->
 		<dependency>
@@ -285,7 +291,7 @@
 				<inherited>true</inherited>
 			</plugin>
 
-			<!-- Swagger UI download -->
+			<!-- Swagger UI et JQuery download -->
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>download-maven-plugin</artifactId>
@@ -301,6 +307,39 @@
 							<url>https://github.com/swagger-api/swagger-ui/archive/v2.1.2.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}</outputDirectory>
+							<md5>8810dfb0080c358f7b56d529f22bdbab</md5>
+						</configuration>
+					</execution>
+					<execution>
+						<id>download-jquery</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://code.jquery.com/jquery-2.1.4.min.js</url>
+							<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/api/swagger</outputDirectory>
+							<md5>f9c7afd05729f10f55b689f36bb20172</md5>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- JQuery rename -->
+			<plugin>
+				<groupId>com.coderplus.maven.plugins</groupId>
+				<artifactId>copy-rename-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>rename-jquery</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>rename</goal>
+						</goals>
+						<configuration>
+							<sourceFile>${project.build.directory}/${project.artifactId}-${project.version}/api/swagger/jquery-2.1.4.min.js</sourceFile>
+							<destinationFile>${project.build.directory}/${project.artifactId}-${project.version}/api/swagger/jquery.min.js</destinationFile>
 						</configuration>
 					</execution>
 				</executions>
@@ -319,7 +358,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-						<outputDirectory>target/${project.artifactId}-${project.version}</outputDirectory>
+						<outputDirectory>target/${project.artifactId}-${project.version}/api/swagger</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${project.build.directory}/swagger-ui-2.1.2/dist</directory>
