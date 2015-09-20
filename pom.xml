@@ -90,6 +90,12 @@
 		<!-- Spring security framework version -->
 		<spring-security-framework.version>4.0.2.RELEASE</spring-security-framework.version>
 
+		<!-- Spring Data framework version -->
+		<spring-data-framework.version>1.9.0.RELEASE</spring-data-framework.version>
+
+		<!-- JPA APIversion -->
+		<jpa-api.version>1.0.0.Final</jpa-api.version>
+
 		<!-- CXF version -->
 		<cxf.version>3.1.2</cxf.version>
 
@@ -189,7 +195,35 @@
 			<artifactId>nimbus-jose-jwt</artifactId>
 			<version>4.0</version>
 		</dependency>
-  
+
+		<!-- Spring Data dependency -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-framework.version}</version>
+		</dependency>
+
+		<!-- Hibernate dependency -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.0.1.Final</version>
+		</dependency>
+
+		<!-- JPA API dependency -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>${jpa-api.version}</version>
+		</dependency>
+
+		<!-- HSQL DataBase dependency -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+
 		<!-- CXF dependencies -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
