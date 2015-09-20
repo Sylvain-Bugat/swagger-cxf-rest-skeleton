@@ -31,7 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Inject
 	public void configureGlobal(final AuthenticationManagerBuilder authentication) throws Exception {
-		authentication.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("password").roles("ADMIN");
 
 		final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(12));
@@ -56,6 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(contextPath + "/*", contextPath + "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
 				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN") // API access
 
-		.and().formLogin().loginProcessingUrl("/auth/login").usernameParameter("username").passwordParameter("password").successHandler(authenticationSuccessHandler).permitAll(); //
+		.and().formLogin().loginProcessingUrl("/auth/login").usernameParameter("username").passwordParameter("password").successHandler(authenticationSuccessHandler).permitAll(); // Login REST service
 	}
 }
