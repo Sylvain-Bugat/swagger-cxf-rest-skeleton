@@ -10,6 +10,7 @@
 					$.ajax({
 						type: 'POST',
 						cache: false,
+						contentType: "application/json",
 						url: '/auth/login',
 						data: $(this).serialize(),
 						success: function(msg) {
