@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableJpaRepositories(
-		basePackages = "com.github.sbugat.samplerest.repository")
+		basePackages = "com.github.sbugat.samplerest.dao")
 @EnableTransactionManagement
 public class JpaConfiguration {
 
