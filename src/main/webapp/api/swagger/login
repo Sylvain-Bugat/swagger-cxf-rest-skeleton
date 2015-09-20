@@ -10,10 +10,10 @@
 					$.ajax({
 						type: 'POST',
 						cache: false,
-						url: '/api/user/login',
+						url: '/auth/login',
 						data: $(this).serialize(),
 						success: function(msg) {
-							window.location.href = "/api/swagger/ui";
+							window.location.href = "/swagger/ui";
 						}
 					});
 				});
@@ -24,7 +24,7 @@
 		<div id="boxContentId">
 		</div>
 		<div tiles:fragment="content">
-			<form name="loginForm" action="/api/user/login" method="POST>
+			<form name="loginForm" action="/auth/login" method="POST>
 				<fieldset>
 					<legend>Please Login</legend>
 					<div th:if="${param.error}" class="alert alert-error">

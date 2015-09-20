@@ -34,7 +34,7 @@
 				if (url && url.length > 1) {
 					url = decodeURIComponent(url[1]);
 				} else {
-					url = "http://localhost:8080/api/swagger.json";
+					url = "/swagger.json";
 				}
 				window.swaggerUi = new SwaggerUi({
 					url: url,
@@ -73,16 +73,7 @@
 					}
 				}
 
-				var apiToken = location.search.split('apiToken=')[1];
-				$('#input_apiToken').val(apiToken);
-
 				window.swaggerUi.load();
-				var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_token", apiToken, "header");
-				window.swaggerUi.api.clientAuthorizations.add("api_token", apiKeyAuth);
-				window.swaggerUi.load();
-
-				// if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
-				$('#input_apiToken').change(addApiKeyAuthorization);
 			});
 		</script>
 	</head>

@@ -11,11 +11,11 @@ import org.apache.cxf.transport.servlet.CXFServlet;
 		loadOnStartup = 1,
 		initParams = { @WebInitParam(
 				name = "swagger.api.basepath",
-				value = "/api"),
+				value = "/"),
 				@WebInitParam(
 						name = "swagger.security.filter",
 						value = "ApiAuthorizationFilterImpl") },
-		urlPatterns = "/api/*")
+		urlPatterns = "/*")
 public class CXFServiceServlet extends CXFServlet {
 
 	/** Serial UID. */

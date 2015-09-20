@@ -47,17 +47,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		final String contextPath = servletContext.getContextPath();
 
 		httpSecurity.csrf().disable() // Disable CSRF
-				.addFilterAfter(new TokenAuthenticationFilter(contextPath + "/**"), UsernamePasswordAuthenticationFilter.class) // API token filter
+				.addFilterAfter(new TokenAuthenticationFilter(contextPath, "/**"), UsernamePasswordAuthenticationFilter.class) // API token filter
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Session less
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
 		// .and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
 
-		.and().authorizeRequests().antMatchers(contextPath + "/swagger/login", contextPath + "/swagger/jquery.min.js").permitAll() // Login and resources access
+		.and().authorizeRequests().antMatchers(contextPath + "/auth/login", contextPath + "/swagger/login", contextPath + "/swagger/jquery.min.js").permitAll() // Login and Swagger login resources access
 				.antMatchers(contextPath + "/*", contextPath + "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
-				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN") // API access
-				.antMatchers("/**").denyAll(); // Deny all other resources
-
+				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN"); // API access
 	}
 }
