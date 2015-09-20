@@ -29,8 +29,6 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.github.sbugat.samplerest.data.UserData;
 import com.github.sbugat.samplerest.model.AuthenticationToken;
 
@@ -67,9 +65,8 @@ public class AuthenticationResource {
 			@ApiParam(
 					value = "The password for login in clear text",
 					required = true) @QueryParam("password") final String password) {
+
 		final AuthenticationToken authenticationToken = new AuthenticationToken();
-		System.out.println("------------------------------------- Security credentials:" + SecurityContextHolder.getContext().getAuthentication().getClass());
-		System.out.println("------------------------------------- Security credentials:" + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		authenticationToken.setApiToken(Long.valueOf(123456).toString());
 		final Cookie cookie = new Cookie("api_token", "123456", "/", null);
 		final NewCookie newCookie = new NewCookie(cookie, "comment", -1, null, false, true);
