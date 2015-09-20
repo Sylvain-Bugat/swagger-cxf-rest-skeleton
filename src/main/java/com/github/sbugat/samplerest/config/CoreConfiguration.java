@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
@@ -16,6 +17,7 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @ComponentScan("com.github.sbugat.samplerest")
 @PropertySource("classpath:environment/${" + CoreConfiguration.ENVIRONMENT_TYPE + ':' + CoreConfiguration.DEFAULT_ENVIRONMENT_TYPE + "}/application-configuration.properties")
+@Import({ JpaConfiguration.class })
 public class CoreConfiguration {
 
 	static final String ENVIRONMENT_TYPE = "environment.type";
