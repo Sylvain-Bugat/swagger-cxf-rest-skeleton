@@ -4,24 +4,23 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.github.sbugat.samplerest.web.security.AuthenticationSuccessHandler;
+import com.github.sbugat.samplerest.service.security.UserDetailsService;
 import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Inject
-	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	private UserDetailsService userDetailsService;
 
 	@Inject
 	private ServletContext servletContext;
@@ -31,14 +30,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		authentication.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin").password("password").roles("ADMIN");
 
 		final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setSaltSource(new SaltSource() {
-
-			@Override
-			public Object getSalt(final UserDetails user) {
-				return user.getUsername();
-			}
-		});
+		daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(12));
+		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 		authentication.authenticationProvider(daoAuthenticationProvider);
+
+		authentication.userDetailsService(userDetailsService);
 	}
 
 	@Override
@@ -52,10 +48,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		.and().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint()) // Entry point
 
-		// .and().formLogin().successHandler(authenticationSuccessHandler).loginProcessingUrl("/api/user/login").failureUrl("/login").usernameParameter("username").passwordParameter("password") // login access
-
 		.and().authorizeRequests().antMatchers(contextPath + "/auth/login", contextPath + "/swagger/login", contextPath + "/swagger/jquery.min.js").permitAll() // Login and Swagger login resources access
 				.antMatchers(contextPath + "/*", contextPath + "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
-				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN"); // API access
+				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN") // API access
+
+		.and().formLogin().loginProcessingUrl("/auth/login").usernameParameter("username").passwordParameter("password").permitAll(); //
 	}
 }
