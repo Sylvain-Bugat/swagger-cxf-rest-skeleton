@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.github.sbugat.samplerest.service.security.UserDetailsService;
-import com.github.sbugat.samplerest.web.security.AuthenticationSuccessHandler;
+import com.github.sbugat.samplerest.web.security.LoginAuthenticationSuccessHandler;
 import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 
 @EnableWebSecurity
@@ -24,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 
 	@Inject
-	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	private LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
 
 	@Inject
 	private ServletContext servletContext;
@@ -55,6 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(contextPath + "/*", contextPath + "/swagger/**").hasRole("ADMIN") // Admin access to Swagger
 				.antMatchers(contextPath + "/**").hasAnyRole("USER", "ADMIN") // API access
 
-		.and().formLogin().loginProcessingUrl("/auth/login").usernameParameter("username").passwordParameter("password").successHandler(authenticationSuccessHandler).permitAll(); // Login REST service
+		.and().formLogin().loginProcessingUrl("/auth/login").usernameParameter("username").passwordParameter("password").successHandler(loginAuthenticationSuccessHandler).permitAll(); // Login REST service
 	}
 }

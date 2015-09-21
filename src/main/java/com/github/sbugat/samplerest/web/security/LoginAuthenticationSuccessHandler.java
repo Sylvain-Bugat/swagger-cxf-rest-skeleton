@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Named
-public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class LoginAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 	@Override
 	protected String determineTargetUrl(final HttpServletRequest request, final HttpServletResponse response) {
