@@ -97,7 +97,7 @@
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
 
 		<!-- CXF version -->
-		<cxf.version>3.1.2</cxf.version>
+		<cxf.version>3.1.3</cxf.version>
 
 		<!-- Servlet API version (JSR 340) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
