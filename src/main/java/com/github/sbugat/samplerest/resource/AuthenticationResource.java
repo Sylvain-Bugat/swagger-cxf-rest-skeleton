@@ -30,7 +30,6 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.data.UserData;
-import com.github.sbugat.samplerest.model.AuthenticationToken;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -66,8 +65,6 @@ public class AuthenticationResource {
 					value = "The password for login in clear text",
 					required = true) @QueryParam("password") final String password) {
 
-		final AuthenticationToken authenticationToken = new AuthenticationToken();
-		authenticationToken.setApiToken(Long.valueOf(123456).toString());
 		final Cookie cookie = new Cookie("api_token", "123456", "/", null);
 		final NewCookie newCookie = new NewCookie(cookie, "comment", -1, null, false, true);
 		return Response.ok().cookie(newCookie).build();
