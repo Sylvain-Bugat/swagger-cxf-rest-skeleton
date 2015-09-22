@@ -13,9 +13,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.dao.UserDao;
+import com.github.sbugat.samplerest.dto.UserDto;
 import com.github.sbugat.samplerest.exception.ApiException;
 import com.github.sbugat.samplerest.exception.NotFoundException;
 import com.github.sbugat.samplerest.model.User;
+import com.github.sbugat.samplerest.service.OrikaBeanMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,13 +38,17 @@ public class UserResource {
 	@Inject
 	private UserDao userDao;
 
+	@Inject
+	OrikaBeanMapper orikaBeanMapper;
+
 	@POST
 	@ApiOperation(
 			value = "Create user",
 			notes = "This can only be done by the logged in user.")
 	public Response createUser(@ApiParam(
 			value = "Created user object",
-			required = true) final User user) {
+			required = true) final UserDto userDto) {
+		final User user = orikaBeanMapper.map(userDto, User.class);
 		userDao.save(user);
 		return Response.ok().entity("").build();
 	}
@@ -64,8 +70,9 @@ public class UserResource {
 			required = true) @PathParam("username") final String username,
 			@ApiParam(
 					value = "Updated user object",
-					required = true) final User user) {
+					required = true) final UserDto userDto) {
 		final User originalUser = userDao.findByUsername(username);
+		final User user = orikaBeanMapper.map(userDto, User.class);
 		user.setId(originalUser.getId());
 		userDao.save(user);
 		return Response.ok().build();
@@ -101,7 +108,7 @@ public class UserResource {
 	@ApiOperation(
 			value = "Get user by user name",
 			notes = "This can only be done by the logged in user.",
-			response = User.class)
+			response = UserDto.class)
 	@ApiResponses(
 			value = { @ApiResponse(
 					code = 400,
@@ -114,8 +121,9 @@ public class UserResource {
 			required = true) @PathParam("username") final String username) throws ApiException {
 
 		final User user = userDao.findByUsername(username);
+		final UserDto userDto = orikaBeanMapper.map(user, UserDto.class);
 		if (null != user) {
-			return Response.ok().entity(user).build();
+			return Response.ok().entity(userDto).build();
 		} else {
 			throw new NotFoundException(404, "User not found");
 		}
