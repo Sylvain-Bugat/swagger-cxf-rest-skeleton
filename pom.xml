@@ -93,8 +93,11 @@
 		<!-- Spring Data framework version -->
 		<spring-data-framework.version>1.9.0.RELEASE</spring-data-framework.version>
 
-		<!-- JPA APIversion -->
+		<!-- JPA API version -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
+
+		<!-- Hibernate version -->
+		<hibernate.version>5.0.1.Final</hibernate.version>
 
 		<!-- HSQLDB version -->
 		<hsqldb.version>2.3.3</hsqldb.version>
@@ -213,7 +216,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.0.1.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
 		<!-- JPA API dependency -->
