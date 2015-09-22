@@ -96,6 +96,9 @@
 		<!-- JPA APIversion -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
 
+		<!-- HSQLDB version -->
+		<hsqldb.version>2.3.3</hsqldb.version>
+
 		<!-- Orika APIversion -->
 		<orika.version>1.4.6</orika.version>
 
@@ -224,7 +227,7 @@
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.3</version>
+			<version>${hsqldb.version}</version>
 		</dependency>
 
 		<!-- Orika dependency -->
