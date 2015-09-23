@@ -417,6 +417,7 @@
 									<filtering>true</filtering>
 									<excludes>
 										<exclude>index.html</exclude>
+										<exclude>swagger-ui.js</exclude>
 									</excludes>
 								</resource>
 							</resources>
