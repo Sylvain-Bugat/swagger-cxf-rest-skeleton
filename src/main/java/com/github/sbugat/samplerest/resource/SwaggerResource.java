@@ -11,20 +11,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.github.sbugat.samplerest.exception.NotFoundException;
 import com.google.common.io.Files;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.Authorization;
 
 @Path("/swagger")
 @Api(
 		value = "/swagger",
-		authorizations = { @Authorization("api_token") },
 		hidden = true)
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Named
 public class SwaggerResource {
 
