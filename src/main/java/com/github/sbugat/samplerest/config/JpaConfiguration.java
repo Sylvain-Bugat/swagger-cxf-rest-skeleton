@@ -23,7 +23,7 @@ public class JpaConfiguration {
 	public DataSource dataSource() {
 
 		final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		return builder.setType(EmbeddedDatabaseType.HSQL).build();
+		return builder.setType(EmbeddedDatabaseType.H2).build();
 	}
 
 	@Bean
