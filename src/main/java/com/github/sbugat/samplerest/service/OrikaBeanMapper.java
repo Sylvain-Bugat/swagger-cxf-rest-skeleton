@@ -12,7 +12,6 @@ import ma.glasnost.orika.Converter;
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
 
 @Named
@@ -34,12 +33,7 @@ public class OrikaBeanMapper extends ConfigurableMapper implements ApplicationCo
 	@Override
 	protected void configure(final MapperFactory mapperfactoryArg) {
 		mapperfactory = mapperfactoryArg;
-		addAllSpringBeans(applicationContext);
-	}
-
-	@Override
-	protected void configureFactoryBuilder(final DefaultMapperFactory.Builder factoryBuilder) {
-		// Nothing to do?
+		addAllSpringBeans();
 	}
 
 	/**
@@ -57,7 +51,7 @@ public class OrikaBeanMapper extends ConfigurableMapper implements ApplicationCo
 	}
 
 	@SuppressWarnings("rawtypes")
-	private void addAllSpringBeans(final ApplicationContext applicationContext) {
+	private void addAllSpringBeans() {
 		final Map<String, Mapper> mappers = applicationContext.getBeansOfType(Mapper.class);
 		for (final Mapper mapper : mappers.values()) {
 			addMapper(mapper);
