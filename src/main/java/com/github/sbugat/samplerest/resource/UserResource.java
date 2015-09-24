@@ -8,10 +8,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.dao.UserDao;
 import com.github.sbugat.samplerest.dto.UserDto;
+import com.github.sbugat.samplerest.dto.UserDtoV2;
 import com.github.sbugat.samplerest.exception.ApiException;
 import com.github.sbugat.samplerest.exception.BadRequestException;
 import com.github.sbugat.samplerest.exception.NotFoundException;
@@ -54,7 +56,7 @@ public class UserResource extends GenericResource {
 	@PUT
 	@Path("/{username}")
 	@ApiOperation(
-			value = "Updated user",
+			value = "Update user",
 			notes = "This can only be done by the logged in user.")
 	@ApiResponses(
 			value = { @ApiResponse(
@@ -102,11 +104,13 @@ public class UserResource extends GenericResource {
 	}
 
 	@GET
-	@Path("/{username}")
+	@Path("/{usernameV1}")
+	@Produces(GenericResource.API_VERSION1_MEDIA_TYPE)
 	@ApiOperation(
 			value = "Get user by user name",
 			notes = "This can only be done by the logged in user.",
-			response = UserDto.class)
+			response = UserDto.class,
+			tags = "user-deprecated")
 	@ApiResponses(
 			value = { @ApiResponse(
 					code = 400,
@@ -116,12 +120,39 @@ public class UserResource extends GenericResource {
 							message = "User not found") })
 	public Response getUserByName(@ApiParam(
 			value = "The name that needs to be fetched. Use user1 for testing. ",
-			required = true) @PathParam("username") final String username) throws ApiException {
+			required = true) @PathParam("usernameV1") final String username) throws ApiException {
 
 		final User user = userDao.findByUsername(username);
 		final UserDto userDto = orikaBeanMapper.map(user, UserDto.class);
 		if (null != user) {
 			return Response.ok().entity(userDto).build();
+		} else {
+			throw new NotFoundException(404, "User not found");
+		}
+	}
+
+	@GET
+	@Path("/{username}")
+	@Produces(GenericResource.API_VERSION2_MEDIA_TYPE)
+	@ApiOperation(
+			value = "Get user by user name",
+			notes = "This can only be done by the logged in user.",
+			response = UserDtoV2.class)
+	@ApiResponses(
+			value = { @ApiResponse(
+					code = 400,
+					message = "Invalid username supplied"),
+					@ApiResponse(
+							code = 404,
+							message = "User not found") })
+	public Response getUserByName2(@ApiParam(
+			value = "The name that needs to be fetched. Use user1 for testing. ",
+			required = true) @PathParam("username") final String username) throws ApiException {
+
+		final User user = userDao.findByUsername(username);
+		final UserDtoV2 userDtoV2 = orikaBeanMapper.map(user, UserDtoV2.class);
+		if (null != user) {
+			return Response.ok().entity(userDtoV2).build();
 		} else {
 			throw new NotFoundException(404, "User not found");
 		}
