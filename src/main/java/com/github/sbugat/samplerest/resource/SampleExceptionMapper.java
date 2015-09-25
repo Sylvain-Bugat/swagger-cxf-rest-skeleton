@@ -5,6 +5,9 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import org.slf4j.Logger;
+import org.slf4j.ext.XLoggerFactory;
+
 import com.github.sbugat.samplerest.exception.ApiException;
 import com.github.sbugat.samplerest.exception.BadRequestException;
 import com.github.sbugat.samplerest.exception.NotFoundException;
@@ -12,6 +15,8 @@ import com.github.sbugat.samplerest.model.ApiResponse;
 
 @Provider
 public class SampleExceptionMapper implements ExceptionMapper<Exception> {
+
+	private static final Logger logger = XLoggerFactory.getXLogger(SampleExceptionMapper.class);
 
 	@Override
 	public Response toResponse(final Exception exception) {
@@ -27,6 +32,7 @@ public class SampleExceptionMapper implements ExceptionMapper<Exception> {
 		} else if (exception instanceof ApiException) {
 			return Response.status(Status.BAD_REQUEST).entity(new ApiResponse(ApiResponse.ERROR, exception.getMessage())).type("application/json").build();
 		} else {
+			logger.error("Internal server error", exception);
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(new ApiResponse(500, "Internal server error")).type("application/json").build();
 		}
 	}
