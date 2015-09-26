@@ -3,6 +3,8 @@ package com.github.sbugat.samplerest.resource;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 import com.github.sbugat.samplerest.service.OrikaBeanMapper;
 
@@ -16,4 +18,7 @@ public abstract class GenericResource {
 
 	@Inject
 	protected OrikaBeanMapper orikaBeanMapper;
+
+	@Context
+	protected UriInfo uriInfo;
 }
