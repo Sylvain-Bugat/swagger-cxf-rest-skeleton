@@ -118,6 +118,7 @@
 
 		<!-- JQuery version for login page -->
 		<jquery.version>2.1.4</jquery.version>
+		<jquery.md5sum>f9c7afd05729f10f55b689f36bb20172</jquery.md5sum>
 
 		<!-- Tools version -->
 		<guava.version>18.0</guava.version>
@@ -376,7 +377,7 @@
 						<configuration>
 							<url>https://code.jquery.com/jquery-${jquery.version}.min.js</url>
 							<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/api/swagger</outputDirectory>
-							<md5>f9c7afd05729f10f55b689f36bb20172</md5>
+							<md5>${jquery.md5sum}</md5>
 						</configuration>
 					</execution>
 				</executions>
