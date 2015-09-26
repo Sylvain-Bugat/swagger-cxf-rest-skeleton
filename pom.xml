@@ -114,6 +114,7 @@
 		<!-- Swagger version -->
 		<swagger.version>1.5.3</swagger.version>
 		<swagger-ui.version>2.1.3</swagger-ui.version>
+		<swagger-ui.md5sum>937ec41f0b4158f4e1654d36b5aec734</swagger-ui.md5sum>
 
 		<!-- JQuery version for login page -->
 		<jquery.version>2.1.4</jquery.version>
@@ -363,7 +364,7 @@
 							<url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>${project.build.directory}</outputDirectory>
-							<md5>937ec41f0b4158f4e1654d36b5aec734</md5>
+							<md5>${swagger-ui.md5sum}</md5>
 						</configuration>
 					</execution>
 					<execution>
