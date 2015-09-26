@@ -9,11 +9,15 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.Response;
+
+import org.slf4j.Logger;
+import org.slf4j.ext.XLoggerFactory;
 
 import com.github.sbugat.samplerest.dao.UserDao;
 import com.github.sbugat.samplerest.dto.UserDto;
-import com.github.sbugat.samplerest.dto.UserDtoV2;
+import com.github.sbugat.samplerest.dto.UserOutputDtoV2;
 import com.github.sbugat.samplerest.exception.ApiException;
 import com.github.sbugat.samplerest.exception.BadRequestException;
 import com.github.sbugat.samplerest.exception.NotFoundException;
@@ -29,6 +33,8 @@ import io.swagger.annotations.ApiResponses;
 @Api("/user")
 @Named
 public class UserResource extends GenericResource {
+
+	private static final Logger logger = XLoggerFactory.getXLogger(UserResource.class);
 
 	@Inject
 	private UserDao userDao;
@@ -137,7 +143,7 @@ public class UserResource extends GenericResource {
 	@ApiOperation(
 			value = "Get user by user name",
 			notes = "This can only be done by the logged in user.",
-			response = UserDtoV2.class)
+			response = UserOutputDtoV2.class)
 	@ApiResponses(
 			value = { @ApiResponse(
 					code = 400,
@@ -150,11 +156,20 @@ public class UserResource extends GenericResource {
 			required = true) @PathParam("username") final String username) throws ApiException {
 
 		final User user = userDao.findByUsername(username);
-		final UserDtoV2 userDtoV2 = orikaBeanMapper.map(user, UserDtoV2.class);
+		final UserOutputDtoV2 userOutputDtoV2 = orikaBeanMapper.map(user, UserOutputDtoV2.class);
+		userOutputDtoV2.addLinks(buildLinks());
 		if (null != user) {
-			return Response.ok().entity(userDtoV2).build();
+			return Response.ok().entity(userOutputDtoV2).links(buildLinks()).build();
 		} else {
 			throw new NotFoundException(404, "User not found");
 		}
+	}
+
+	private Link[] buildLinks() {
+		final Link[] links = { Link.fromUriBuilder(uriInfo.getRequestUriBuilder()).rel("self").build(), // Self link
+				Link.fromUriBuilder(uriInfo.getRequestUriBuilder()).rel("update").build(), // Update link
+				Link.fromUriBuilder(uriInfo.getRequestUriBuilder()).rel("delete").build() // Delete link
+		};
+		return links;
 	}
 }

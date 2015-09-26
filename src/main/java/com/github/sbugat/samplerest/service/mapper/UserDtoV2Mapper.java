@@ -8,6 +8,6 @@ import com.github.sbugat.samplerest.model.User;
 import ma.glasnost.orika.CustomMapper;
 
 @Named
-public class UserDtoMapperV2 extends CustomMapper<User, UserDtoV2> {
+public class UserDtoV2Mapper extends CustomMapper<User, UserDtoV2> {
 	// Nothing to customize
 }
