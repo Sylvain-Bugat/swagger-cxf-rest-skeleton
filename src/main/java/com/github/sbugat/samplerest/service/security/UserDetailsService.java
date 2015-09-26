@@ -23,6 +23,7 @@ import com.google.common.base.Strings;
 @Named
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
+	/** SLF4J Xlogger. */
 	private static final XLogger logger = XLoggerFactory.getXLogger(UserResource.class);
 
 	@Inject
@@ -31,8 +32,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
-		logger.entry(username);
-		logger.info("=-------------------------------------------------" + username);
+		logger.info("Load username {} details", username);
 		final com.github.sbugat.samplerest.model.User user = userDao.findByUsername(username);
 		if (null == user) {
 			final UsernameNotFoundException usernameNotFoundException = new UsernameNotFoundException(username);
