@@ -19,29 +19,29 @@ package com.github.sbugat.samplerest.resource;
 import java.util.Date;
 
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.data.UserData;
+import com.github.sbugat.samplerest.web.security.LoginAuthenticationSuccessHandler;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
 
 @Path("/auth")
-@Api(
-		value = "/auth",
-		authorizations = { @Authorization("api_token") })
+@Api("/auth")
 @Consumes("application/json")
 @Produces("application/json")
 @Named
@@ -63,10 +63,13 @@ public class AuthenticationResource {
 			required = true) @QueryParam("username") final String username,
 			@ApiParam(
 					value = "The password for login in clear text",
-					required = true) @QueryParam("password") final String password) {
+					required = true) @QueryParam("password") final String password,
+			@Context final HttpServletRequest httpServletRequest) {
 
-		final Cookie cookie = new Cookie("api_token", "123456", "/", null);
-		final NewCookie newCookie = new NewCookie(cookie, "comment", -1, null, false, true);
+		final String apiToken = (String) httpServletRequest.getAttribute(LoginAuthenticationSuccessHandler.TOKEN_REQUEST_ATTRIBUTE);
+
+		final Cookie cookie = new Cookie("api_token", apiToken, "/", null);
+		final NewCookie newCookie = new NewCookie(cookie, null, -1, null, false, true);
 		return Response.ok().cookie(newCookie).build();
 	}
 
