@@ -1,12 +1,9 @@
 package com.github.sbugat.samplerest.dto;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import io.swagger.annotations.ApiModelProperty;
 
-@XmlRootElement(
-		name = "User")
 public class UserDtoV2 extends UserDto {
 
 	private int userStatus;
