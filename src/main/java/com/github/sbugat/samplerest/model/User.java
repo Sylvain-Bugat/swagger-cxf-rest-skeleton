@@ -5,14 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-@XmlRootElement(
-		name = "User")
 public class User {
 
 	@Id
@@ -32,8 +26,6 @@ public class User {
 
 	private int userStatus;
 
-	@XmlElement(
-			name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -42,8 +34,6 @@ public class User {
 		this.id = id;
 	}
 
-	@XmlElement(
-			name = "firstName")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -52,8 +42,6 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	@XmlElement(
-			name = "username")
 	public String getUsername() {
 		return username;
 	}
@@ -62,8 +50,6 @@ public class User {
 		this.username = username;
 	}
 
-	@XmlElement(
-			name = "lastName")
 	public String getLastName() {
 		return lastName;
 	}
@@ -72,8 +58,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	@XmlElement(
-			name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -82,8 +66,6 @@ public class User {
 		this.email = email;
 	}
 
-	@XmlElement(
-			name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -92,8 +74,6 @@ public class User {
 		this.password = password;
 	}
 
-	@XmlElement(
-			name = "roles")
 	public String getRoles() {
 		return roles;
 	}
@@ -102,11 +82,6 @@ public class User {
 		this.roles = roles;
 	}
 
-	@XmlElement(
-			name = "userStatus")
-	@ApiModelProperty(
-			value = "User Status",
-			allowableValues = "1-registered,2-active,3-blocked,4-closed")
 	public int getUserStatus() {
 		return userStatus;
 	}
