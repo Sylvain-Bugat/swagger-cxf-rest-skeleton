@@ -208,7 +208,7 @@
 		<dependency>
 			<groupId>com.nimbusds</groupId>
 			<artifactId>nimbus-jose-jwt</artifactId>
-			<version>4.0</version>
+			<version>4.1.1</version>
 		</dependency>
 
 		<!-- Spring Data dependency -->
