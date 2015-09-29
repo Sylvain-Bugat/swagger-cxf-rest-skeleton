@@ -79,7 +79,7 @@ public class UserResource extends GenericResource {
 					required = true) final UserDto userDto) {
 		final User originalUser = userDao.findByUsername(username);
 		final User user = orikaBeanMapper.map(userDto, User.class);
-		user.setId(originalUser.getId());
+		user.setId(originalUser.getUuid());
 		userDao.save(user);
 		return Response.ok().build();
 	}

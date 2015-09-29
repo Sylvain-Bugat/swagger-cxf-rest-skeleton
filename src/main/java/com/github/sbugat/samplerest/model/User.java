@@ -3,16 +3,24 @@ package com.github.sbugat.samplerest.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue(
-			strategy = GenerationType.AUTO)
-	private Long id;
+			generator = "system-uuid")
+	@GenericGenerator(
+			name = "system-uuid",
+			strategy = "uuid")
+	@Column(
+			length = 32,
+			updatable = false,
+			nullable = false)
+	private String uuid;
 
 	@Column(
 			unique = true)
@@ -26,12 +34,12 @@ public class User {
 
 	private int userStatus;
 
-	public Long getId() {
-		return id;
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public void setId(final String uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getFirstName() {
