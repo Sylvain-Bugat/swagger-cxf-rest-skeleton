@@ -1,27 +1,10 @@
 package com.github.sbugat.samplerest.model;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class User {
-
-	@Id
-	@GeneratedValue(
-			generator = "uuid2")
-	@GenericGenerator(
-			name = "uuid2",
-			strategy = "uuid2")
-	@Column(
-			updatable = false,
-			nullable = false)
-	private UUID uuid;
+public class User extends GenericEntity {
 
 	@Column(
 			unique = true)
@@ -34,14 +17,6 @@ public class User {
 	private String roles;
 
 	private int userStatus;
-
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setId(final UUID uuid) {
-		this.uuid = uuid;
-	}
 
 	public String getFirstName() {
 		return firstName;
