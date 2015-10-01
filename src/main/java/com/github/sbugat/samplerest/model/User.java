@@ -1,5 +1,7 @@
 package com.github.sbugat.samplerest.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +14,14 @@ public class User {
 
 	@Id
 	@GeneratedValue(
-			generator = "system-uuid")
+			generator = "uuid2")
 	@GenericGenerator(
-			name = "system-uuid",
-			strategy = "uuid")
+			name = "uuid2",
+			strategy = "uuid2")
 	@Column(
-			length = 32,
 			updatable = false,
 			nullable = false)
-	private String uuid;
+	private UUID uuid;
 
 	@Column(
 			unique = true)
@@ -34,11 +35,11 @@ public class User {
 
 	private int userStatus;
 
-	public String getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setId(final String uuid) {
+	public void setId(final UUID uuid) {
 		this.uuid = uuid;
 	}
 

@@ -1,10 +1,12 @@
 package com.github.sbugat.samplerest.dao;
 
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.github.sbugat.samplerest.model.User;
 
-public interface UserDao extends JpaRepository<User, String> {
+public interface UserDao extends JpaRepository<User, UUID> {
 
 	public User findByUsername(final String username);
 }
