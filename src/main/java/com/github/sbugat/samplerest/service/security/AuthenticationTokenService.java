@@ -69,7 +69,7 @@ public class AuthenticationTokenService {
 
 		final UserToken userToken = new UserToken();
 		if (null != oldToken) {
-			userToken.setId(oldToken.getId());
+			userToken.setId(oldToken.getUuid());
 		}
 		userToken.setUser(user);
 		userToken.setTokenStatus(1);

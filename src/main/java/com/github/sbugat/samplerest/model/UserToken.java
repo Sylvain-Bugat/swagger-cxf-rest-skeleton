@@ -2,18 +2,10 @@ package com.github.sbugat.samplerest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class UserToken {
-
-	@Id
-	@GeneratedValue(
-			strategy = GenerationType.AUTO)
-	private Long id;
+public class UserToken extends GenericEntity {
 
 	@ManyToOne
 	private User user;
@@ -23,14 +15,6 @@ public class UserToken {
 	private String authenticationToken;
 
 	private int tokenStatus;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
 
 	public User getUser() {
 		return user;
