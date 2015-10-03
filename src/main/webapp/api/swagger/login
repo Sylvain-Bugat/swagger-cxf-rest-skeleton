@@ -7,6 +7,8 @@
 			$(document).ready(function() {
 				$('form[name=loginForm]').submit(function(e){
 					e.preventDefault();
+					var username=document.getElementById('username');
+					var password=document.getElementById('password');
 					$.ajax({
 						type: 'POST',
 						cache: false,
@@ -25,7 +27,7 @@
 		<div id="boxContentId">
 		</div>
 		<div tiles:fragment="content">
-			<form name="loginForm" action="/auth/login" method="POST>
+			<form name="loginForm" action="/auth/login" method="POST">
 				<fieldset>
 					<legend>Please Login</legend>
 					<div th:if="${param.error}" class="alert alert-error">

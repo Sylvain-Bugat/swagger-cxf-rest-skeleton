@@ -21,11 +21,10 @@ import java.util.Date;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
@@ -42,8 +41,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Path("/auth")
 @Api("/auth")
-@Consumes("application/json")
-@Produces("application/json")
+@Consumes("application/x-www-form-urlencoded")
 @Named
 public class AuthenticationResource {
 
@@ -60,10 +58,10 @@ public class AuthenticationResource {
 					message = "Invalid username/password supplied") })
 	public Response loginUser(@ApiParam(
 			value = "The user name for login",
-			required = true) @QueryParam("username") final String username,
+			required = true) @FormParam("username") final String username,
 			@ApiParam(
 					value = "The password for login in clear text",
-					required = true) @QueryParam("password") final String password,
+					required = true) @FormParam("password") final String password,
 			@Context final HttpServletRequest httpServletRequest) {
 
 		final String apiToken = (String) httpServletRequest.getAttribute(LoginAuthenticationSuccessHandler.TOKEN_REQUEST_ATTRIBUTE);
