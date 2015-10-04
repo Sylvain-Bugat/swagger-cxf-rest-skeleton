@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.sbugat.samplerest.dto.UserPasswordDto;
 
 @Named
 public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -42,22 +43,16 @@ public class JSONUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
 
-		final UserData userData;
+		final UserPasswordDto userData;
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
-			userData = mapper.readValue(request.getInputStream(), UserData.class);
+			userData = mapper.readValue(request.getInputStream(), UserPasswordDto.class);
 		} catch (final IOException e) {
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
 
-		final UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userData.username, userData.password);
+		final UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userData.getUsername(), userData.getPassword());
 		setDetails(request, authRequest);
 		return this.getAuthenticationManager().authenticate(authRequest);
-	}
-
-	private static final class UserData {
-
-		public String username;
-		public String password;
 	}
 }

@@ -19,18 +19,16 @@ package com.github.sbugat.samplerest.resource;
 import java.util.Date;
 
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.data.UserData;
+import com.github.sbugat.samplerest.dto.UserPasswordDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,12 +54,8 @@ public class AuthenticationResource {
 					code = 400,
 					message = "Invalid username/password supplied") })
 	public Response loginUser(@ApiParam(
-			value = "The user name for login",
-			required = true) @FormParam("username") final String username,
-			@ApiParam(
-					value = "The password for login in clear text",
-					required = true) @FormParam("password") final String password,
-			@Context final HttpServletRequest httpServletRequest) {
+			value = "The user name and password for login",
+			required = true) final UserPasswordDto userPasswordDto) {
 
 		// Do nothing here (Dead code), authentification is done in JSONUsernamePasswordAuthenticationFilter and LoginAuthenticationSuccessHandler
 		return Response.ok().build();
