@@ -39,7 +39,7 @@
 	</scm>
 	<distributionManagement>
 		<site>
-			<id>rundeck-monitor-github-site</id>
+			<id>swagger-cxf-rest-skeleton-github-site</id>
 			<url>scm:git:git://github.com/Sylvain-Bugat/swagger-cxf-rest-skeleton.git</url>
 		</site>
 	</distributionManagement>
