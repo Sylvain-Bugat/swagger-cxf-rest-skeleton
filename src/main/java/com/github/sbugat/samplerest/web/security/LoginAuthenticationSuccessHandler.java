@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +18,6 @@ import com.github.sbugat.samplerest.service.security.AuthenticationTokenService;
 
 @Named
 public class LoginAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
-	public static String TOKEN_REQUEST_ATTRIBUTE = LoginAuthenticationSuccessHandler.class.getName();
 
 	@Inject
 	private AuthenticationTokenService authenticationTokenService;
@@ -38,13 +37,12 @@ public class LoginAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 			final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
 			final String token = authenticationTokenService.generateAuthenticationToken(userDetails.getUsername());
-			if (null != token) {
 
-				request.setAttribute(TOKEN_REQUEST_ATTRIBUTE, token);
-			}
+			final Cookie cookie = new Cookie("api_token", token);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+
+			response.setStatus(HttpServletResponse.SC_OK);
 		}
-
-		final String url = determineTargetUrl(request, response);
-		request.getRequestDispatcher(url).forward(request, response);
 	}
 }

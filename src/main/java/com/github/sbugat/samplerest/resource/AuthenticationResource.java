@@ -31,7 +31,6 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import com.github.sbugat.samplerest.data.UserData;
-import com.github.sbugat.samplerest.web.security.LoginAuthenticationSuccessHandler;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,7 +40,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Path("/auth")
 @Api("/auth")
-@Consumes("application/x-www-form-urlencoded")
+@Consumes("application/json")
 @Named
 public class AuthenticationResource {
 
@@ -64,11 +63,8 @@ public class AuthenticationResource {
 					required = true) @FormParam("password") final String password,
 			@Context final HttpServletRequest httpServletRequest) {
 
-		final String apiToken = (String) httpServletRequest.getAttribute(LoginAuthenticationSuccessHandler.TOKEN_REQUEST_ATTRIBUTE);
-
-		final Cookie cookie = new Cookie("api_token", apiToken, "/", null);
-		final NewCookie newCookie = new NewCookie(cookie, null, -1, null, false, true);
-		return Response.ok().cookie(newCookie).build();
+		// Do nothing here (Dead code), authentification is done in JSONUsernamePasswordAuthenticationFilter and LoginAuthenticationSuccessHandler
+		return Response.ok().build();
 	}
 
 	@GET
