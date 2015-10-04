@@ -7,7 +7,7 @@ import com.github.sbugat.samplerest.model.UserToken;
 
 public interface UserTokenDao extends JpaRepository<UserToken, Long> {
 
-	public UserToken findByAuthenticationToken(final String authenticationToken);
+	UserToken findByAuthenticationToken(final String authenticationToken);
 
-	public UserToken findByUser(final User user);
+	UserToken findByUser(final User user);
 }

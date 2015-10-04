@@ -11,17 +11,18 @@ import org.slf4j.ext.XLogger.Level;
 import org.slf4j.ext.XLoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.github.sbugat.samplerest.dao.UserDao;
+import com.github.sbugat.samplerest.model.User;
 import com.github.sbugat.samplerest.resource.UserResource;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 
 @Named
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserDetailsSecurityService implements UserDetailsService {
 
 	/** SLF4J Xlogger. */
 	private static final XLogger logger = XLoggerFactory.getXLogger(UserResource.class);
@@ -33,14 +34,14 @@ public class UserDetailsService implements org.springframework.security.core.use
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
 		logger.info("Load username {} details", username);
-		final com.github.sbugat.samplerest.model.User user = userDao.findByUsername(username);
+		final User user = userDao.findByUsername(username);
 		if (null == user) {
 			final UsernameNotFoundException usernameNotFoundException = new UsernameNotFoundException(username);
 			logger.throwing(Level.TRACE, usernameNotFoundException);
 			throw usernameNotFoundException;
 		}
 
-		return new User(username, user.getPassword(), true, true, true, true, toAuthorities(user.getRoles()));
+		return new org.springframework.security.core.userdetails.User(username, user.getPassword(), true, true, true, true, toAuthorities(user.getRoles()));
 	}
 
 	private static Collection<? extends GrantedAuthority> toAuthorities(final String roles) {

@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiResponses;
 @Named
 public class UserResource extends GenericResource {
 
-	private static final Logger logger = XLoggerFactory.getXLogger(UserResource.class);
+	private static final Logger log = XLoggerFactory.getXLogger(UserResource.class);
 
 	@Inject
 	private UserDao userDao;

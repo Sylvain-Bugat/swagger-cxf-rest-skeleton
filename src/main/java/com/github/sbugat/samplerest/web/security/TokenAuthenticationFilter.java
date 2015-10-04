@@ -115,10 +115,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
 
 		try {
 			authResult = attemptAuthentication(request, response);
-			if (authResult == null) {
-				// return immediately as subclass has indicated that it hasn't completed authentication
-				return;
-			}
 			// sessionStrategy.onAuthentication(authResult, request, response);
 		} catch (final InternalAuthenticationServiceException failed) {
 			logger.error("An internal error occurred while trying to authenticate the user.", failed);

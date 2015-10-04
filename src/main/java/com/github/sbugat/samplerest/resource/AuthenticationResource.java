@@ -27,7 +27,6 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
-import com.github.sbugat.samplerest.data.UserData;
 import com.github.sbugat.samplerest.dto.UserPasswordDto;
 
 import io.swagger.annotations.Api;
@@ -41,8 +40,6 @@ import io.swagger.annotations.ApiResponses;
 @Consumes("application/json")
 @Named
 public class AuthenticationResource {
-
-	static UserData userData = new UserData();
 
 	@POST
 	@Path("/login")

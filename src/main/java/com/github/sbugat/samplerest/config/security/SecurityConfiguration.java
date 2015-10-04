@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.github.sbugat.samplerest.service.security.UserDetailsService;
+import com.github.sbugat.samplerest.service.security.UserDetailsSecurityService;
 import com.github.sbugat.samplerest.web.security.JSONUsernamePasswordAuthenticationFilter;
 import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 
@@ -23,7 +23,7 @@ import com.github.sbugat.samplerest.web.security.TokenAuthenticationFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Inject
-	private UserDetailsService userDetailsService;
+	private UserDetailsSecurityService userDetailsSecurityService;
 
 	@Inject
 	private ServletContext servletContext;
@@ -39,10 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(12));
-		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+		daoAuthenticationProvider.setUserDetailsService(userDetailsSecurityService);
 		authentication.authenticationProvider(daoAuthenticationProvider);
 
-		authentication.userDetailsService(userDetailsService);
+		authentication.userDetailsService(userDetailsSecurityService);
 	}
 
 	@Bean

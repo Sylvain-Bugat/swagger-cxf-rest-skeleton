@@ -8,5 +8,5 @@ import com.github.sbugat.samplerest.model.User;
 
 public interface UserDao extends JpaRepository<User, UUID> {
 
-	public User findByUsername(final String username);
+	User findByUsername(final String username);
 }

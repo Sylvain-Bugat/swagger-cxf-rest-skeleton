@@ -17,6 +17,11 @@ public class ApiOriginFilter implements Filter {
 
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
+
+		if (!HttpServletResponse.class.isInstance(response)) {
+			throw new IOException("response is not an instance of " + HttpServletResponse.class.getName());
+		}
+
 		final HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
 		httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
