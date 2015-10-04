@@ -5,6 +5,9 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.github.sbugat.samplerest.dao.UserDao;
 import com.github.sbugat.samplerest.model.User;
 
@@ -30,7 +33,12 @@ public class UserData {
 
 		final User user = new User();
 		user.setUsername(username);
-		user.setPassword(password);
+
+		// Password encoding
+		final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		final String encodedPassword = passwordEncoder.encode(password);
+		user.setPassword(encodedPassword);
+
 		user.setEmail(email);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
