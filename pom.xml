@@ -93,7 +93,7 @@
 		<!-- Spring Data framework version -->
 		<spring-data-framework.version>1.9.0.RELEASE</spring-data-framework.version>
 
-		<!-- JPA API version -->
+		<!-- JPA API 2.1 version (JSR 338) -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
 
 		<!-- Hibernate version -->
@@ -225,7 +225,7 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		<!-- JPA API dependency -->
+		<!-- JPA API 2.1 dependency -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
