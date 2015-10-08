@@ -39,6 +39,7 @@ public class LoginAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
 			final String token = authenticationTokenService.generateAuthenticationToken(userDetails.getUsername());
 
 			final Cookie cookie = new Cookie("api_token", token);
+			cookie.setHttpOnly(true);
 			cookie.setPath("/");
 			response.addCookie(cookie);
 
