@@ -280,7 +280,6 @@
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-jaxrs</artifactId>
 			<version>${swagger.version}</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- Servlet API dependency (JSR 340) -->
