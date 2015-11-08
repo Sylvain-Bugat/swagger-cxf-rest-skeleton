@@ -303,7 +303,6 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-ext</artifactId>
 			<version>${slf4j.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -315,13 +314,11 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 			<version>${logback.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- Test Dependencies (Junit, Mockito)  -->
