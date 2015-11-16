@@ -96,7 +96,7 @@
 		<spring-security-framework.version>4.0.3.RELEASE</spring-security-framework.version>
 
 		<!-- Spring Data framework version -->
-		<spring-data-framework.version>1.9.0.RELEASE</spring-data-framework.version>
+		<spring-data-framework.version>1.9.1.RELEASE</spring-data-framework.version>
 
 		<!-- JPA API 2.1 version (JSR 338) -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
