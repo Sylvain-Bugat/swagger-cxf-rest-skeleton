@@ -87,7 +87,7 @@
 		<javax-inject-api.version>1</javax-inject-api.version>
 
 		<!-- Spring framework version -->
-		<springframework.version>4.2.2.RELEASE</springframework.version>
+		<springframework.version>4.2.3.RELEASE</springframework.version>
 
 		<!-- JAX RS API version (JSR 339) -->
 		<javax-rs-api.version>2.0.1</javax-rs-api.version>
