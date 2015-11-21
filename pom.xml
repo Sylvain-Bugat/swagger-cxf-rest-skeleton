@@ -101,6 +101,9 @@
 		<!-- JPA API 2.1 version (JSR 338) -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
 
+		<!-- Java Transation API version (JSR 907) -->
+		<jta.version>1.1</jta.version>
+
 		<!-- Hibernate version -->
 		<hibernate.version>5.0.4.Final</hibernate.version>
 
@@ -221,6 +224,13 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring-data-framework.version}</version>
+		</dependency>
+
+		<!-- Java Transation API dependency (JSR 907) -->
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>${jta.version}</version>
 		</dependency>
 
 		<!-- Hibernate dependency -->
