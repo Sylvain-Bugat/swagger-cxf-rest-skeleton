@@ -105,7 +105,7 @@
 		<jta.version>1.1</jta.version>
 
 		<!-- Hibernate version -->
-		<hibernate.version>5.0.4.Final</hibernate.version>
+		<hibernate.version>5.0.5.Final</hibernate.version>
 
 		<!-- H2 version -->
 		<h2.version>1.4.190</h2.version>
