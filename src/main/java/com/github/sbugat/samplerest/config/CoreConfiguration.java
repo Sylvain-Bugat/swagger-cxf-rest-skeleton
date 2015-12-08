@@ -6,16 +6,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.github.sbugat.samplerest.resource.SampleExceptionMapper;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 @ComponentScan("com.github.sbugat.samplerest")
+@EnableEncryptableProperties
 @PropertySource("classpath:environment/${" + CoreConfiguration.ENVIRONMENT_TYPE + ':' + CoreConfiguration.DEFAULT_ENVIRONMENT_TYPE + "}/application-configuration.properties")
 @Import({ JpaConfiguration.class })
 public class CoreConfiguration {
@@ -49,16 +50,5 @@ public class CoreConfiguration {
 	@Bean
 	public ApiListingResource apiListingResource() {
 		return new ApiListingResource();
-	}
-
-	/**
-	 * Return the PropertySourcesPlaceholderConfigurer before properties file loading (static method).
-	 *
-	 * @return new PropertySourcesPlaceholderConfigurer instance
-	 */
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		// instantiate, configure and return ppc ...
-		return new PropertySourcesPlaceholderConfigurer();
 	}
 }
