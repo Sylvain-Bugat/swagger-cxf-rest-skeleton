@@ -135,7 +135,7 @@
 		<jquery.md5sum>f9c7afd05729f10f55b689f36bb20172</jquery.md5sum>
 
 		<!-- Tools version -->
-		<guava.version>18.0</guava.version>
+		<guava.version>19.0</guava.version>
 
 		<!--  Log frameworks version  -->
 		<slf4j.version>1.7.13</slf4j.version>
