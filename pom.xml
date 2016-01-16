@@ -117,7 +117,7 @@
 		<orika.version>1.4.6</orika.version>
 
 		<!-- Nimbus JWT version -->
-		<nimbus-jose-jwt.version>4.11</nimbus-jose-jwt.version>
+		<nimbus-jose-jwt.version>4.11.1</nimbus-jose-jwt.version>
 
 		<!-- CXF version -->
 		<cxf.version>3.1.4</cxf.version>
