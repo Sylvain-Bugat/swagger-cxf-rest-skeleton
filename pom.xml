@@ -111,7 +111,7 @@
 		<hibernate.version>5.0.7.Final</hibernate.version>
 
 		<!-- H2 version -->
-		<h2.version>1.4.190</h2.version>
+		<h2.version>1.4.191</h2.version>
 
 		<!-- Orika APIversion -->
 		<orika.version>1.4.6</orika.version>
