@@ -93,7 +93,7 @@
 		<javax-rs-api.version>2.0.1</javax-rs-api.version>
 
 		<!-- Spring security framework version -->
-		<spring-security-framework.version>4.0.3.RELEASE</spring-security-framework.version>
+		<spring-security-framework.version>4.0.4.RELEASE</spring-security-framework.version>
 
 		<!-- Jasypt encryption integration version -->
 		<jasypt-spring-boot.version>1.6</jasypt-spring-boot.version>
