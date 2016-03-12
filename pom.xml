@@ -126,7 +126,7 @@
 		<servlet-api.version>3.1.0</servlet-api.version>
 
 		<!-- Swagger version -->
-		<swagger.version>1.5.7</swagger.version>
+		<swagger.version>1.5.8</swagger.version>
 		<swagger-ui.version>2.1.3</swagger-ui.version>
 		<swagger-ui.md5sum>937ec41f0b4158f4e1654d36b5aec734</swagger-ui.md5sum>
 
