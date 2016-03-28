@@ -120,7 +120,7 @@
 		<nimbus-jose-jwt.version>4.12</nimbus-jose-jwt.version>
 
 		<!-- CXF version -->
-		<cxf.version>3.1.5</cxf.version>
+		<cxf.version>3.1.6</cxf.version>
 
 		<!-- Servlet API version (JSR 340) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
