@@ -159,7 +159,7 @@
 		<maven.plugin-download.version>1.3.0</maven.plugin-download.version>
 		<maven.plugin-copy-rename.version>1.0.1</maven.plugin-copy-rename.version>
 		<maven.pluginassembly.version>2.6</maven.pluginassembly.version>
-		<maven.pluginversions.version>2.2</maven.pluginversions.version>
+		<maven.pluginversions.version>2.3</maven.pluginversions.version>
 		<maven.pluginenforcer.version>1.4.1</maven.pluginenforcer.version>
 		<maven.pluginantrun.version>1.8</maven.pluginantrun.version>
 		<maven.plugindependency.version>2.10</maven.plugindependency.version>
