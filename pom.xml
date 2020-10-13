@@ -145,7 +145,7 @@
 		<javassist.version>3.20.0-GA</javassist.version>
 
 		<!-- Tests -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 
 		<!-- Maven Lifecycle Plugins Version -->
 		<maven.pluginclean.version>3.0.0</maven.pluginclean.version>
