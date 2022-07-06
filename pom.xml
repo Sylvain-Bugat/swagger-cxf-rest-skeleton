@@ -99,7 +99,7 @@
 		<jasypt-spring-boot.version>1.7</jasypt-spring-boot.version>
 
 		<!-- Spring Data framework version -->
-		<spring-data-framework.version>1.10.2.RELEASE</spring-data-framework.version>
+		<spring-data-framework.version>1.11.23.RELEASE</spring-data-framework.version>
 
 		<!-- JPA API 2.1 version (JSR 338) -->
 		<jpa-api.version>1.0.0.Final</jpa-api.version>
